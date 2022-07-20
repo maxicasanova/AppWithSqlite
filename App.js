@@ -1,83 +1,35 @@
-import { Keyboard, StyleSheet, Text, View } from 'react-native';
 import React, { useState } from "react";
 
-import AddItem from './src/components/AddItem';
-import CustomModal from './src/components/CustomModal';
-import Lista from './src/components/Lista';
+import AppLoading from 'expo-app-loading';
+import Header from './src/components/Header';
+import Login from './src/components/Login';
+import Tasks from "./src/components/Tasks";
+import { useFonts } from 'expo-font';
 
 export default function App() {
+
+  const loaded = useFonts({
+    Roboto: require('./assets/fonts/Roboto-Regular.ttf'),
+    RobotoBold: require('./assets/fonts/Roboto-Bold.ttf'),
+    RobotoLight: require('./assets/fonts/Roboto-Light.ttf')
+  })
+
+  if (!loaded) return <AppLoading />
+
+  const [nombre, setNombre] = useState('')
+
+  const [logged, setLogged] = useState(false)
   
-  const [textItem, setTextItem] = useState('');
-  const [list, setList] = useState([{
-          descripcion: "Tarea de Ejemplo",
-          fecha: '07/12/2022',
-          id: 1,
-          completed:false
-      }]);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [itemSelected, setItemSelected] = useState('');
-
-  const handleButtonAdd = () => {
-      let today = new Date();
-      let dd = String(today.getDate()).padStart(2, '0');
-      let mm = String(today.getMonth() + 1).padStart(2, '0');
-      let yyyy = today.getFullYear();
-      today = mm + '/' + dd + '/' + yyyy;
-
-      setList(currentItems => [...currentItems, {id:list.length + 1, descripcion:textItem, fecha:today, completed:false}]);
-      setTextItem('');
-      Keyboard.dismiss();
-  }
-
-  const handleTextChange = (text) => setTextItem(text);
-
-  const handleDelete = () => {
-    setList(list.filter(elem => elem.id !== itemSelected));
-    setModalVisible(!modalVisible);
-  }
-
-  const handleCompleted = (id) => {
-    setList(list.map(element => element.id === id ? {...element, completed : true} : element));
-  }
-
   return (
     <>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>To do List</Text>
-      </View>
-      <CustomModal
-        modalVisible={modalVisible}
-        handleDelete={handleDelete}
-        setModalVisible={setModalVisible}
-        itemSelected={itemSelected}
-      />
-      <AddItem
-        textItem={textItem}
-        handleTextChange={handleTextChange}
-        handleButtonAdd={handleButtonAdd}
-      />
-      <Lista 
-        list={list}
-        handleCompleted={handleCompleted}
-        setModalVisible={setModalVisible}
-        setItemSelected={setItemSelected}
-      />
+      <Header nombre={nombre} setLogged={setLogged} logged={logged} />
+      {!logged ?
+      <Login nombre={nombre} setNombre={setNombre} setLogged={setLogged} />
+      :
+      <Tasks />
+      }
+      
     </>
   );
 }
 
-const styles = StyleSheet.create({
-  header: {
-    backgroundColor:'#1E90FF',
-    minHeight:100,
-    display:'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 20
-  },
-  headerTitle: {
-    fontSize:20,
-    fontWeight:'700',
-    color:'#fff'
-  }
-});

@@ -25,25 +25,31 @@ export default function ItemList (props) {
             >
                 <Text style={[styles.text, styles.actions]}>&#10003;</Text>
             </Pressable> }
-            {/* <Pressable
-                onPress={() => console.log('asd')}
-            >
-                <Text style={[styles.text, styles.actions]}>&#9998;</Text>
-            </Pressable> */}
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     item: {
-        backgroundColor:'#D9D9D9',
+        backgroundColor:'#fff',
         borderRadius:20,
+        // borderWidth:2,
+        // borderStyle:'solid',
+        // borderColor: '#1E90FF',
         margin: 10,
         height:80,
         display:'flex',
         flexDirection:'row',
         justifyContent:'space-evenly',
         alignItems:'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 3,
     },
     completed:{
         backgroundColor:'#F2F2F2',
@@ -56,7 +62,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
     },
     text:{
-        fontWeight:'700'
+        fontFamily:'Roboto'
     },
     textCompleted:{
         color:'white'

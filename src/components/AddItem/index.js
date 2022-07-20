@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Keyboard, Pressable, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
 
 export default function AddItem (props) {
 
@@ -6,6 +6,7 @@ export default function AddItem (props) {
 
     return(
         <View>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <View style={styles.wrapper}>
                 <TextInput
                     placeholder='Ingrese aqui su tarea'
@@ -21,6 +22,7 @@ export default function AddItem (props) {
                     <Text style={styles.textButton}>&#43;</Text>
                 </Pressable>
             </View>
+            </TouchableWithoutFeedback>
         </View>
     )
 }
@@ -28,7 +30,8 @@ export default function AddItem (props) {
 const styles = StyleSheet.create({
     input:{
         width:300,
-        maxWidth:'90%'
+        maxWidth:'90%',
+        fontSize:24
     },
     button : {
         backgroundColor:'green',
@@ -37,7 +40,8 @@ const styles = StyleSheet.create({
         borderRadius:100,
         display:'flex',
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
+        marginBottom:5
     },
     textButton:{
         fontSize:30,
@@ -46,6 +50,7 @@ const styles = StyleSheet.create({
     wrapper:{
         display:'flex',
         flexDirection:'row',
-        margin:30
+        margin:30,
+        borderBottomWidth:1
     }
 })

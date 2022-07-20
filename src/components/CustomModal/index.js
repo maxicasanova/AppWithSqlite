@@ -73,11 +73,13 @@ const styles = StyleSheet.create({
     textStyle: {
         color: "white",
         fontWeight: "bold",
-        textAlign: "center"
+        textAlign: "center",
+        fontFamily:'RobotoLight'
     },
     modalText: {
         marginBottom: 15,
-        textAlign: "center"
+        textAlign: "center",
+        fontFamily:'RobotoBold'
     },
     actions:{
         width:'70%',
