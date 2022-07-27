@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import AppLoading from 'expo-app-loading';
 import Header from './src/components/Header';
 import Login from './src/components/Login';
+import ShopNavigator from './navigation/ShopNavigator';
 import Tasks from "./src/components/Tasks";
 import { useFonts } from 'expo-font';
 
@@ -22,13 +23,13 @@ export default function App() {
   
   return (
     <>
-      <Header nombre={nombre} setLogged={setLogged} logged={logged} />
+      <ShopNavigator />
+      {/* <Header nombre={nombre} setLogged={setLogged} logged={logged} />
       {!logged ?
       <Login nombre={nombre} setNombre={setNombre} setLogged={setLogged} />
       :
       <Tasks />
-      }
-      
+      } */}
     </>
   );
 }
