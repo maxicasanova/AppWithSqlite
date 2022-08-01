@@ -1,29 +1,24 @@
 import { Image, Platform } from 'react-native'
 
-import {BreadDetailScreen} from '../screens/BreadDetailScreen'
 import {CategoriesScreen} from '../screens/CategoriesScreen'
-import {CategoryBreadScreen} from '../screens/CategoryBreadScreen'
+import {CategoryNoteScreen} from '../screens/CategoryNoteScreen'
+import {DetailScreen} from '../screens/DetailScreen'
 import { NavigationContainer } from '@react-navigation/native'
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 // import { COLORS } from '../constants/colors'
 
-
-
-
-
-
 const Stack = createNativeStackNavigator()
 
-const Logo = () => {
-    return (
-        <Image source={require('../assets/icon.png')} style={{width: 50, height: 50}}/>
-    )
-}
+// const Logo = () => {
+//     return (
+//         <Image source={require('../assets/lista.png')} style={{width: 50, height: 50}}/>
+//     )
+// }
 
 
-const ShopNavigator = () => {
+const NotesNavigator = ({nombre}) => {
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Home" screenOptions={{
@@ -32,14 +27,15 @@ const ShopNavigator = () => {
                 },
                 // headerTintColor: Platform.OS === 'android' ? 'white' : COLORS.primary,
                 headerTitleStyle: {
-                    fontWeight: 'bold'
+                    // fontWeight: 'bold'
                 }
             }}>
-                <Stack.Screen name='Home' component={CategoriesScreen} options={{ /* headerTitle: (props) => <Logo {...props} /> */ title: 'Mi pan'}}/>
-                <Stack.Screen name='Products' component={CategoryBreadScreen} options={({route}) => ({ title: route.params.name})}/>
-                <Stack.Screen name='Detail' component={BreadDetailScreen} options={({route}) => ({title: route.params.bread.name})} />
+                <Stack.Screen name='Home' component={CategoriesScreen} options={{title: `Notas de ${nombre}`}}/>
+                {/* headerTitle: (props) => (<Logo {...props} />),  */}
+                <Stack.Screen name='Products' component={CategoryNoteScreen} options={({route}) => ({ title: route.params.name})}/>
+                <Stack.Screen name='Detail' component={DetailScreen} options={({route}) => ({title: route.params.task.name})} />
             </Stack.Navigator>
         </NavigationContainer>
     )
 }
-export default ShopNavigator;
+export default NotesNavigator;

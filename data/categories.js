@@ -1,22 +1,17 @@
 export const CATEGORIES = [
     {
         id: 1,
-        title: 'Harinas Puras',
-        color: '#896978'
+        title: 'Trabajo',
+        color: '#595CFF'
     },
     {
         id: 2,
-        title: 'Harinas Integrales',
-        color: '#839791',
+        title: 'Libros',
+        color: '#FFC572',
     },
     {
         id: 3,
-        title: 'Panes Saborizados',
-        color: '#aac0af',
-    },
-    {
-        id: 4,
-        title: 'Otros productos de panaderia',
-        color: '#896978',
+        title: 'Supermercado',
+        color: '#FF6262',
     }
 ]

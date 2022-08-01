@@ -1,16 +1,19 @@
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 import React from "react";
 
 export default function ItemList (props) {
 
-    const {data, setModalVisible, setItemSelected, handleCompleted} = props;
+    const {data, setModalVisible, setItemSelected, handleCompleted, handleSelected} = props;
     
     return (
-        <View style={!data.completed ? styles.item : styles.completed}>
+        <View>
+            <TouchableOpacity
+                onPress={() => handleSelected(data)} 
+                style={!data.completed ? styles.item : styles.completed}
+            >
             <Text style={!data.completed ? styles.text : styles.textCompleted}>{data.id}</Text>
-            <Text style={!data.completed ? styles.text : styles.textCompleted}>{data.descripcion}</Text>
-            <Text style={!data.completed ? styles.text : styles.textCompleted}>{data.fecha}</Text>
+            <Text style={!data.completed ? styles.text : styles.textCompleted}>{data.name}</Text>
             <Pressable
                 onPress={() => {
                     setModalVisible(true);
@@ -25,6 +28,7 @@ export default function ItemList (props) {
             >
                 <Text style={[styles.text, styles.actions]}>&#10003;</Text>
             </Pressable> }
+            </TouchableOpacity>
         </View>
     )
 }
@@ -33,9 +37,6 @@ const styles = StyleSheet.create({
     item: {
         backgroundColor:'#fff',
         borderRadius:20,
-        // borderWidth:2,
-        // borderStyle:'solid',
-        // borderColor: '#1E90FF',
         margin: 10,
         height:80,
         display:'flex',

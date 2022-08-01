@@ -1,8 +1,8 @@
 import {Modal, Pressable, StyleSheet, Text, View} from 'react-native';
 
-export default CustomModal = (props) => {
+export default function CustomModal (props) {
 
-    const {modalVisible, handleDelete, setModalVisible, itemSelected} = props;
+    const {modalVisible, handleDelete, setModalVisible} = props;
 
     return (
         <Modal 
