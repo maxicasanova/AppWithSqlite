@@ -1,6 +1,6 @@
 import { FlatList, Keyboard, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { filteredTask, selectTask } from '../store/actions/task.action.js';
+import { addTask, completeTask, deleteTask, filteredTask, selectTask } from '../store/actions/task.action.js';
 import {useDispatch, useSelector} from 'react-redux';
 
 import AddItem from '../src/components/AddItem/index.js';
@@ -22,27 +22,31 @@ export const CategoryNoteScreen = ({navigation, route}) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [itemSelected, setItemSelected] = useState('');
 
-    // const handleButtonAdd = () => {
-    //     let today = new Date();
-    //     let dd = String(today.getDate()).padStart(2, '0');
-    //     let mm = String(today.getMonth() + 1).padStart(2, '0');
-    //     let yyyy = today.getFullYear();
-    //     today = mm + '/' + dd + '/' + yyyy;
+    const handleButtonAdd = () => {
+        // let today = new Date();
+        // let dd = String(today.getDate()).padStart(2, '0');
+        // let mm = String(today.getMonth() + 1).padStart(2, '0');
+        // let yyyy = today.getFullYear();
+        // today = mm + '/' + dd + '/' + yyyy;
 
-    //     setList(currentItems => [...currentItems, {id:list.length + 1, descripcion:textItem, fecha:today, completed:false}]);
-    //     setTextItem('');
-    //     Keyboard.dismiss();
-    // }
+        // setList(currentItems => [...currentItems, {id:list.length + 1, descripcion:textItem, fecha:today, completed:false}]);
+
+        dispatch(addTask(textItem, category))
+        setTextItem('');
+        Keyboard.dismiss();
+    }
 
     const handleTextChange = (text) => setTextItem(text);
 
     const handleDelete = () => {
-        setList(list.filter(elem => elem.id !== itemSelected));
+        // setList(list.filter(elem => elem.id !== itemSelected));
+        dispatch(deleteTask(itemSelected))
         setModalVisible(!modalVisible);
     }
 
     const handleCompleted = (id) => {
-        setList(list.map(element => element.id === id ? {...element, completed : true} : element));
+        dispatch(completeTask(id));
+        // setList(list.map(element => element.id === id ? {...element, completed : true} : element));
     }
 
     const handleSelected = (item) => {
@@ -76,7 +80,7 @@ export const CategoryNoteScreen = ({navigation, route}) => {
             <AddItem
                 textItem={textItem}
                 handleTextChange={handleTextChange}
-                // handleButtonAdd={handleButtonAdd}
+                handleButtonAdd={handleButtonAdd}
             />
             <FlatList
                 data={categoryTask}

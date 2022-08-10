@@ -9,7 +9,7 @@ export const TASKS = [
     {
         id: 2,
         category: 1,
-        name: 'Actulizar dependencias',
+        name: 'Actualizar dependencias',
         description: 'Algo por aca',
         fechaLimite:'10 de septiembre'
     },

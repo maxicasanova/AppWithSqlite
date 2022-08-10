@@ -26,7 +26,7 @@ function HomeStackScreen() {
         <HomeStack.Navigator>
             <HomeStack.Screen name='Categories' component={CategoriesScreen} options={{title: `Notas`}}/>
             <HomeStack.Screen name='Products' component={CategoryNoteScreen} options={({route}) => ({ title: route.params.name})}/>
-            <HomeStack.Screen name='Detail' component={DetailScreen} options={({route}) => ({title: route.params.task.name})} />
+            <HomeStack.Screen name='Detail' component={DetailScreen} />
         </HomeStack.Navigator>
     );
 }
