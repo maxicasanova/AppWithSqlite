@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FlatList } from 'react-native';
 import GridItem from '../src/components/GridItem';
 import React from 'react';
-import { selectCategory } from '../../store/actions/category.action';
+import { selectCategory } from '../store/actions/category.action';
 
 export const CategoriesScreen = ({ navigation }) => {
 

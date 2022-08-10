@@ -4,7 +4,7 @@ import AppLoading from 'expo-app-loading';
 import Login from './src/components/Login';
 import NotesNavigator from './navigation/NotesNavigator';
 import { Provider } from "react-redux";
-import store from './store'
+import store from './store/index.js'
 import { useFonts } from 'expo-font';
 
 export default function App() {

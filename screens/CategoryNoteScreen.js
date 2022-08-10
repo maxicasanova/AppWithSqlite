@@ -1,6 +1,6 @@
 import { FlatList, Keyboard, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { filteredTask, selectTask } from '../../store/actions/task.action.js';
+import { filteredTask, selectTask } from '../store/actions/task.action.js';
 import {useDispatch, useSelector} from 'react-redux';
 
 import AddItem from '../src/components/AddItem/index.js';
@@ -76,7 +76,7 @@ export const CategoryNoteScreen = ({navigation, route}) => {
             <AddItem
                 textItem={textItem}
                 handleTextChange={handleTextChange}
-                handleButtonAdd={handleButtonAdd}
+                // handleButtonAdd={handleButtonAdd}
             />
             <FlatList
                 data={categoryTask}
