@@ -1,10 +1,11 @@
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native';
 
 import React from 'react'
+import { useSelector } from 'react-redux';
 
-export const DetailScreen = ({ route }) => {
+export const DetailScreen = () => {
 
-    const { task } = route.params
+    const task = useSelector(state => state.tasks.selected)
 
     return (
         <View style={styles.screen}>

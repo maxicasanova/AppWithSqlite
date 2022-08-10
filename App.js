@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import AppLoading from 'expo-app-loading';
 import Login from './src/components/Login';
 import NotesNavigator from './navigation/NotesNavigator';
-// import Tasks from "./src/components/Tasks";
+import { Provider } from "react-redux";
+import store from './store'
 import { useFonts } from 'expo-font';
 
 export default function App() {
@@ -21,13 +22,13 @@ export default function App() {
   const [logged, setLogged] = useState(false)
   
   return (
-    <>
+    <Provider store={store}>
       {!logged ?
       <Login nombre={nombre} setNombre={setNombre} setLogged={setLogged} />
       :
       <NotesNavigator nombre={nombre} />
       }
-    </>
+    </Provider>
   );
 }
 
