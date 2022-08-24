@@ -7,30 +7,17 @@ import AddItem from '../src/components/AddItem/index.js';
 import CustomModal from '../src/components/CustomModal';
 import ItemList from '../src/components/Lista/ItemList';
 
-// import { TASKS } from '../data/tasks';
-
 export const CategoryNoteScreen = ({navigation, route}) => {
 
     const dispatch = useDispatch();
     const categoryTask = useSelector(state => state.tasks.filteredTask);
     const category = useSelector(state=> state.categories.selected)
-    
-    // const tasks = TASKS.filter(task => task.category === route.params.categoryID)
 
     const [textItem, setTextItem] = useState('');
-    // const [list, setList] = useState(categoryTask);
     const [modalVisible, setModalVisible] = useState(false);
     const [itemSelected, setItemSelected] = useState('');
 
     const handleButtonAdd = () => {
-        // let today = new Date();
-        // let dd = String(today.getDate()).padStart(2, '0');
-        // let mm = String(today.getMonth() + 1).padStart(2, '0');
-        // let yyyy = today.getFullYear();
-        // today = mm + '/' + dd + '/' + yyyy;
-
-        // setList(currentItems => [...currentItems, {id:list.length + 1, descripcion:textItem, fecha:today, completed:false}]);
-
         dispatch(addTask(textItem, category))
         setTextItem('');
         Keyboard.dismiss();
@@ -39,14 +26,12 @@ export const CategoryNoteScreen = ({navigation, route}) => {
     const handleTextChange = (text) => setTextItem(text);
 
     const handleDelete = () => {
-        // setList(list.filter(elem => elem.id !== itemSelected));
         dispatch(deleteTask(itemSelected))
         setModalVisible(!modalVisible);
     }
 
     const handleCompleted = (id) => {
         dispatch(completeTask(id));
-        // setList(list.map(element => element.id === id ? {...element, completed : true} : element));
     }
 
     const handleSelected = (item) => {

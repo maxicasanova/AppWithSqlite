@@ -5,6 +5,7 @@ import {CategoryNoteScreen} from '../screens/CategoryNoteScreen'
 import {DetailScreen} from '../screens/DetailScreen'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { NavigationContainer } from '@react-navigation/native'
+import NewPhotoScreen from '../screens/NewPhotoScreen';
 import React from 'react'
 import SettingsScreen from '../screens/SettingsScreen'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -27,6 +28,7 @@ function HomeStackScreen() {
             <HomeStack.Screen name='Categories' component={CategoriesScreen} options={{title: `Notas`}}/>
             <HomeStack.Screen name='Products' component={CategoryNoteScreen} options={({route}) => ({ title: route.params.name})}/>
             <HomeStack.Screen name='Detail' component={DetailScreen} />
+            <HomeStack.Screen name='TakePhoto' component={NewPhotoScreen} />
         </HomeStack.Navigator>
     );
 }
