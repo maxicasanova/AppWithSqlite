@@ -1,11 +1,25 @@
 import * as FileSystem from 'expo-file-system'
 
+import { fetchTasks } from '../../db';
+
 export const SELECTED_TASK = 'SELECTED_TASK';
 export const FILTERED_TASK = 'FILTERED_TASK';
 export const ADD_TASK = 'ADD_TASK';
 export const COMPLETE_TASK = 'COMPLETE_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
 export const ADD_TASK_PHOTO = 'ADD_TASK_PHOTO';
+export const LOAD_TASKS = 'LOAD_TASKS';
+
+export const loadTasks = () => {
+    return async dispatch => {
+        try{
+            const result = await fetchTasks()
+            dispatch({type: LOAD_TASKS, tasks:result.rows_array})
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
 
 export const selectTask = (id) => ({
     type: SELECTED_TASK,

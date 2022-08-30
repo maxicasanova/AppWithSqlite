@@ -1,4 +1,4 @@
-import { ADD_TASK, ADD_TASK_PHOTO, COMPLETE_TASK, DELETE_TASK, FILTERED_TASK, SELECTED_TASK } from "../actions/task.action";
+import { ADD_TASK, ADD_TASK_PHOTO, COMPLETE_TASK, DELETE_TASK, FILTERED_TASK, LOAD_TASKS, SELECTED_TASK } from "../actions/task.action";
 
 import { TASKS } from "../../data/tasks";
 
@@ -40,10 +40,15 @@ const TaskReducer = (state=initialState, action) => {
                 tasks: state.tasks.filter(elem => elem.id !== action.taskID)
             }
         case ADD_TASK_PHOTO:
-        return {
+            return {
             ...state,
             tasks: state.tasks.map(element => element.id === action.taskID ? {...element, photo : action.taskPhoto} : element)
         }
+        case LOAD_TASKS:
+            return {
+                ...state, 
+                tasks: [...state.tasks, ...action.tasks]
+            }
         default:
             return state;
     }
