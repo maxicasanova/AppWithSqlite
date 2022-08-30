@@ -1,4 +1,4 @@
-import { Image, Platform } from 'react-native'
+import React, { useEffect } from "react";
 
 import {CategoriesScreen} from '../screens/CategoriesScreen'
 import {CategoryNoteScreen} from '../screens/CategoryNoteScreen'
@@ -6,20 +6,12 @@ import {DetailScreen} from '../screens/DetailScreen'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { NavigationContainer } from '@react-navigation/native'
 import NewPhotoScreen from '../screens/NewPhotoScreen';
-import React from 'react'
 import SettingsScreen from '../screens/SettingsScreen'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { loadTasks } from "../store/actions/task.action";
+import { useDispatch } from "react-redux";
 
-// import { COLORS } from '../constants/colors'
-
-
-// const Logo = () => {
-    //     return (
-        //         <Image source={require('../assets/lista.png')} style={{width: 50, height: 50}}/>
-        //     )
-        // }
-        
 const HomeStack = createNativeStackNavigator();
 
 function HomeStackScreen() {
@@ -47,6 +39,15 @@ const Tab = createBottomTabNavigator();
 
 
 const NotesNavigator = () => {
+
+    const dispatch = useDispatch();
+
+    useEffect(()=> {
+        dispatch(loadTasks);
+        console.log('hola')
+    },[])
+
+    
     return (
         <NavigationContainer>
             <Tab.Navigator screenOptions={({ route }) => ({

@@ -25,10 +25,11 @@ export default function App() {
 
   if (!loaded) return <AppLoading />
 
-  const [nombre, setNombre] = useState('')
+  const [nombre, setNombre] = useState('');
 
-  const [logged, setLogged] = useState(false)
+  const [logged, setLogged] = useState(false);
   
+
   return (
     <Provider store={store}>
       {!logged ?

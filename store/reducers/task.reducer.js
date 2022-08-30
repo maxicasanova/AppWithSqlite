@@ -20,14 +20,9 @@ const TaskReducer = (state=initialState, action) => {
                 filteredTask: state.tasks.filter(t => t.category === action.categoryID)
             }
         case ADD_TASK:
-            let today = new Date();
-            let dd = String(today.getDate()).padStart(2, '0');
-            let mm = String(today.getMonth() + 1).padStart(2, '0');
-            let yyyy = today.getFullYear();
-            today = mm + '/' + dd + '/' + yyyy;
             return {
                 ...state,
-                tasks : [...state.tasks, {id:state.tasks.length+1,completed:false, fecha:today, descripcion:action.descripcion, category:action.categoryID}]
+                tasks : [...state.tasks, {id:action.taskID,completed:false, fecha:action.taskDate, descripcion:action.taskDescription, category:action.taskCategory}]
             }
         case COMPLETE_TASK:
             return {
@@ -46,7 +41,7 @@ const TaskReducer = (state=initialState, action) => {
         }
         case LOAD_TASKS:
             return {
-                ...state, 
+                ...state,
                 tasks: [...state.tasks, ...action.tasks]
             }
         default:
