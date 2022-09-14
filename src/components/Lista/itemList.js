@@ -13,7 +13,7 @@ export default function ItemList (props) {
                 style={!data.completed ? styles.item : styles.completed}
             >
             <Text style={!data.completed ? styles.text : styles.textCompleted}>{data.id}</Text>
-            <Text style={!data.completed ? styles.text : styles.textCompleted}>{data.name}</Text>
+            <Text style={!data.completed ? styles.text : styles.textCompleted}>{data.description}</Text>
             <Pressable
                 onPress={() => {
                     setModalVisible(true);
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
     },
     text:{
-        fontFamily:'Roboto'
+        fontFamily:'OpenRegular'
     },
     textCompleted:{
         color:'white'

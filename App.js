@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-
 import AppLoading from 'expo-app-loading';
-import Login from './src/components/Login';
-import NotesNavigator from './navigation/NotesNavigator';
+import MainNavigation from './navigation/index';
 import { Provider } from "react-redux";
+import React from "react";
 import { init } from './db'
 import store from './store/index.js'
 import { useFonts } from 'expo-font';
@@ -15,28 +13,22 @@ init()
     console.log(err.message)
   })
 
+
+
 export default function App() {
 
   const loaded = useFonts({
-    Roboto: require('./assets/fonts/Roboto-Regular.ttf'),
-    RobotoBold: require('./assets/fonts/Roboto-Bold.ttf'),
-    RobotoLight: require('./assets/fonts/Roboto-Light.ttf')
+    OpenRegular: require('./assets/fonts/OpenSans-Regular.ttf'),
+    OpenBold: require('./assets/fonts/OpenSans-Bold.ttf'),
+    OpenMedium: require('./assets/fonts/OpenSans-Medium.ttf'),
+    OpenLight: require('./assets/fonts/OpenSans-Light.ttf'),
   })
 
   if (!loaded) return <AppLoading />
-
-  const [nombre, setNombre] = useState('');
-
-  const [logged, setLogged] = useState(false);
   
-
   return (
     <Provider store={store}>
-      {!logged ?
-      <Login nombre={nombre} setNombre={setNombre} setLogged={setLogged} />
-      :
-      <NotesNavigator nombre={nombre} />
-      }
+      <MainNavigation />
     </Provider>
   );
 }

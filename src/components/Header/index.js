@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     },
     headerTitle: {
         fontSize:20,
-        fontFamily:'RobotoBold',
+        fontFamily:'OpenBold',
         color:'#fff'
     },
     backButton:{

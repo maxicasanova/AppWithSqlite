@@ -45,7 +45,6 @@ const ImageSelector = props => {
             </View>
             <Button 
                 title='Tomar foto'
-                // color={COLORS.LIGTH_PINK}
                 onPress={handlerTakeImage}
             />
         </View>

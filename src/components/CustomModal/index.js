@@ -74,12 +74,12 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: "bold",
         textAlign: "center",
-        fontFamily:'RobotoLight'
+        fontFamily:'OpenLight'
     },
     modalText: {
         marginBottom: 15,
         textAlign: "center",
-        fontFamily:'RobotoBold'
+        fontFamily:'OpenBold'
     },
     actions:{
         width:'70%',

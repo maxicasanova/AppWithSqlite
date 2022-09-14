@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 
 import {CategoriesScreen} from '../screens/CategoriesScreen'
 import {CategoryNoteScreen} from '../screens/CategoryNoteScreen'
+import Colors from "../constants/Colors";
 import {DetailScreen} from '../screens/DetailScreen'
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { NavigationContainer } from '@react-navigation/native'
 import NewPhotoScreen from '../screens/NewPhotoScreen';
 import SettingsScreen from '../screens/SettingsScreen'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -30,7 +30,7 @@ const SettingsStack = createNativeStackNavigator();
 function SettingsStackScreen() {
     return (
         <SettingsStack.Navigator>
-            <SettingsStack.Screen name="All" component={SettingsScreen} />
+            <SettingsStack.Screen name="Configuracion" component={SettingsScreen} />
         </SettingsStack.Navigator>
     );
 }
@@ -43,13 +43,11 @@ const NotesNavigator = () => {
     const dispatch = useDispatch();
 
     useEffect(()=> {
-        dispatch(loadTasks);
-        console.log('hola')
+        dispatch(loadTasks());
     },[])
 
     
     return (
-        <NavigationContainer>
             <Tab.Navigator screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
@@ -61,14 +59,13 @@ const NotesNavigator = () => {
                     }
                     return <Ionicons name={iconName} size={size} color={color} />;
                 },
-                tabBarActiveTintColor: 'tomato',
+                tabBarActiveTintColor: Colors.red,
                 tabBarInactiveTintColor: 'gray',
                 })}
         >
                 <Tab.Screen name="Home" component={HomeStackScreen}/>
                 <Tab.Screen name="Settings" component={SettingsStackScreen} />
             </Tab.Navigator>
-        </NavigationContainer>
     )
 }
 export default NotesNavigator;

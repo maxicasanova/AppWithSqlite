@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         elevation: 3,
     },
     title: {
-        fontFamily: 'RobotoBold',
+        fontFamily: 'OpenBold',
     }
 })
 

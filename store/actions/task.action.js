@@ -1,21 +1,17 @@
 import * as FileSystem from 'expo-file-system'
 
-import { fetchTasks, insertTask } from '../../db';
+import { deleteTaskDB, fetchTasks, insertTask, updateTask } from '../../db';
 
 export const SELECTED_TASK = 'SELECTED_TASK';
 export const FILTERED_TASK = 'FILTERED_TASK';
-export const ADD_TASK = 'ADD_TASK';
 export const COMPLETE_TASK = 'COMPLETE_TASK';
-export const DELETE_TASK = 'DELETE_TASK';
-export const ADD_TASK_PHOTO = 'ADD_TASK_PHOTO';
 export const LOAD_TASKS = 'LOAD_TASKS';
 
 export const loadTasks = () => {
     return async dispatch => {
         try{
             const result = await fetchTasks();
-            console.log(result);
-            dispatch({type: LOAD_TASKS, tasks:result.rows_array})
+            dispatch({type: LOAD_TASKS, tasks:result.rows._array})
         } catch (err) {
             console.log(err)
         }
@@ -32,32 +28,19 @@ export const filteredTask = (id) => ({
     categoryID: id
 });
 
-// export const addTask = (category, description) =>({
-//     type: ADD_TASK,
-//     descripcion:text,
-//     categoryID: category
-// });
-
-export const addTask = (category, description) => {
+export const addTask = (textItem, category) => {
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
     let mm = String(today.getMonth() + 1).padStart(2, '0');
     let yyyy = today.getFullYear();
-    fechaLimite = mm + '/' + dd + '/' + yyyy;
-    const name = '';
+    let fechaLimite = mm + '/' + dd + '/' + yyyy;
     const image = '';
 
     return async dispatch => {
         try{
-            const result = await insertTask(category,name,description,image,fechaLimite);
-            dispatch(
-                {
-                    type: ADD_TASK, 
-                    taskID:result.id, 
-                    taskDescription:description, 
-                    taskCategory: category, 
-                    taskDate:fechaLimite
-                })
+            await insertTask(category,textItem,image,fechaLimite);
+            const result = await fetchTasks();
+            dispatch({type: LOAD_TASKS, tasks:result.rows._array})
         } catch (err) {
             console.log(err);
         }
@@ -69,10 +52,17 @@ export const completeTask = (id) =>({
     taskID: id
 });
 
-export const deleteTask = (id) =>({
-    type: DELETE_TASK,
-    taskID: id
-});
+export const deleteTask = (id) => {
+    return async dispatch => {
+        try{
+            await deleteTaskDB(id);
+            const result = await fetchTasks();
+            dispatch({type: LOAD_TASKS, tasks:result.rows._array})
+        } catch (err) {
+            console.log(err)
+        }
+    }
+};
 
 export const addPhoto = (id, image) => {
     return async dispatch => {
@@ -84,16 +74,15 @@ export const addPhoto = (id, image) => {
                 from: image,
                 to: Path
             })
+
+            await updateTask(Path, id);
+            const result = await fetchTasks();
+            dispatch({type: LOAD_TASKS, tasks:result.rows._array})
+
         } catch (error) {
             console.log(error.message)
             throw error
         }
-
-        dispatch({ 
-            type: ADD_TASK_PHOTO, 
-            taskID: id,
-            taskPhoto: Path
-        })
     }
 }
 

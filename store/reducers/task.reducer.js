@@ -1,9 +1,7 @@
-import { ADD_TASK, ADD_TASK_PHOTO, COMPLETE_TASK, DELETE_TASK, FILTERED_TASK, LOAD_TASKS, SELECTED_TASK } from "../actions/task.action";
-
-import { TASKS } from "../../data/tasks";
+import { COMPLETE_TASK, FILTERED_TASK, LOAD_TASKS, SELECTED_TASK } from "../actions/task.action";
 
 const initialState = {
-    tasks: TASKS,
+    tasks: [],
     selected: null
 }
 
@@ -12,37 +10,22 @@ const TaskReducer = (state=initialState, action) => {
         case SELECTED_TASK:
             return {
                 ...state,
-                selected: state.tasks.find(t => t.id === action.taskID)
+                selected: state.tasks?.find(t => t.id === action.taskID)
             }
         case FILTERED_TASK:
             return {
                 ...state,
-                filteredTask: state.tasks.filter(t => t.category === action.categoryID)
-            }
-        case ADD_TASK:
-            return {
-                ...state,
-                tasks : [...state.tasks, {id:action.taskID,completed:false, fecha:action.taskDate, descripcion:action.taskDescription, category:action.taskCategory}]
+                filteredTasks: state.tasks.filter(t => t.category === action.categoryID)
             }
         case COMPLETE_TASK:
             return {
                 ...state,
-                tasks: state.tasks.map(element => element.id === action.taskID ? {...element, completed : true} : element)
+                tasks: state.tasks?.map(element => element.id === action.taskID ? {...element, completed : true} : element)
             }
-        case DELETE_TASK:
-            return {
-                ...state,
-                tasks: state.tasks.filter(elem => elem.id !== action.taskID)
-            }
-        case ADD_TASK_PHOTO:
-            return {
-            ...state,
-            tasks: state.tasks.map(element => element.id === action.taskID ? {...element, photo : action.taskPhoto} : element)
-        }
         case LOAD_TASKS:
             return {
                 ...state,
-                tasks: [...state.tasks, ...action.tasks]
+                tasks: [...action.tasks]
             }
         default:
             return state;

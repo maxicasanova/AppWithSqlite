@@ -1,5 +1,6 @@
 import { Button, Image, StyleSheet, Text, View } from 'react-native';
 
+import Colors from '../constants/Colors';
 import React from 'react'
 import { useSelector } from 'react-redux';
 
@@ -14,14 +15,13 @@ export const DetailScreen = ({navigation}) => {
     }
     return (
         <View style={styles.screen}>
-            <Text style={styles.title}>{task.name}</Text>
-            <Text>{task.description}</Text>
-            <Text>{task.fechaLimite}</Text>
+            <Text style={styles.title}>{task.description}</Text>
+            <Text style={styles.text}>Nota agregada en la fecha: {task.fechaLimite}</Text>
             { task.photo ? 
                 <Image source={{ uri: task.photo}} style={styles.image} /> 
                 :
                 <View>
-                    <Text>Pueder agregar una foto.</Text>
+                    <Text style={styles.text}>Pueder agregar una foto.</Text>
                     <Button title='Agregar una foto' onPress={handleButton}/>
                 </View>
             }
@@ -34,15 +34,18 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: Colors.background,
     },
     title: {
         fontSize: 20,
-        fontFamily: 'RobotoBold',
+        fontFamily: 'OpenBold',
         marginBottom: 10
     },
     image: {
-        width: 70,
-        height: 70
+        width: 100,
+        height: 100
     },
+    text:{
+        marginBottom:10
+    }
 })

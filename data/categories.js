@@ -2,16 +2,16 @@ export const CATEGORIES = [
     {
         id: 1,
         title: 'Trabajo',
-        color: '#595CFF'
+        color: '#F52F57'
     },
     {
         id: 2,
-        title: 'Libros',
-        color: '#FFC572',
+        title: 'Ocio',
+        color: '#1B9AAA',
     },
     {
         id: 3,
-        title: 'Supermercado',
-        color: '#FF6262',
+        title: 'Otros',
+        color: '#AA767C',
     }
 ]

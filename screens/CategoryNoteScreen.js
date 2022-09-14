@@ -1,6 +1,6 @@
 import { FlatList, Keyboard, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { addTask, completeTask, deleteTask, filteredTask, selectTask } from '../store/actions/task.action.js';
+import { addTask, completeTask, deleteTask, filteredTask, loadTasks, selectTask } from '../store/actions/task.action.js';
 import {useDispatch, useSelector} from 'react-redux';
 
 import AddItem from '../src/components/AddItem/index.js';
@@ -10,7 +10,7 @@ import ItemList from '../src/components/Lista/ItemList';
 export const CategoryNoteScreen = ({navigation, route}) => {
 
     const dispatch = useDispatch();
-    const categoryTask = useSelector(state => state.tasks.filteredTask);
+    const categoryTask = useSelector(state => state.tasks.filteredTasks);
     const category = useSelector(state=> state.categories.selected)
 
     const [textItem, setTextItem] = useState('');
@@ -18,7 +18,7 @@ export const CategoryNoteScreen = ({navigation, route}) => {
     const [itemSelected, setItemSelected] = useState('');
 
     const handleButtonAdd = () => {
-        dispatch(addTask(textItem, category))
+        dispatch(addTask(textItem, category.id))
         setTextItem('');
         Keyboard.dismiss();
     }
@@ -53,7 +53,7 @@ export const CategoryNoteScreen = ({navigation, route}) => {
 
     useEffect(()=> {
         dispatch(filteredTask(category.id))
-    },[])
+    },[textItem, modalVisible])
 
     return (
         <View>
